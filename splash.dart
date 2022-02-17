@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swifty_companion/search.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -45,11 +46,17 @@ class _SplashState extends State<Splash> {
                       backgroundColor: Colors.white,
                       // padding: const EdgeInsets.all(16.0),
                       primary: const Color(0xff09D178),
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         fontSize: 16,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => Search()),
+                        (Route<dynamic> route) => false,
+                      );
+                    },
                     child: const Text(
                       "Sign In",
                     ),

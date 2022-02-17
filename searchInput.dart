@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:swifty_companion/searchResult.dart';
+import 'package:swifty_companion/splash.dart';
 
 class SearchInput extends StatefulWidget {
   const SearchInput({Key? key}) : super(key: key);
@@ -25,6 +27,7 @@ class _SearchInputState extends State<SearchInput> {
             width: contextWidth * 0.75,
             child: TextFormField(
               controller: login,
+              style: TextStyle(color: Colors.white),
               decoration: const InputDecoration(
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
@@ -43,8 +46,7 @@ class _SearchInputState extends State<SearchInput> {
                   borderSide: BorderSide(width: 1, color: Color(0xff09D178)),
                 ),
                 labelText: 'Login',
-                labelStyle: TextStyle(color: Color(0xff848484)),
-                counterStyle: TextStyle(color: Colors.grey),
+                labelStyle: TextStyle(color: Colors.white),
               ),
               validator: (String? value) {},
             ),
@@ -67,14 +69,20 @@ class _SearchInputState extends State<SearchInput> {
                 borderRadius: BorderRadius.circular(10),
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: Color(0xffF9FFFC),
+                    backgroundColor: const Color(0xffF9FFFC),
                     // padding: const EdgeInsets.all(16.0),
                     primary: const Color(0xff09D178),
-                    textStyle: TextStyle(
-                      fontSize: 16,
+                    textStyle: const TextStyle(
+                      fontSize: 18,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => SearchResult()),
+                      (Route<dynamic> route) => false,
+                    );
+                  },
                   child: const Text(
                     "search",
                   ),

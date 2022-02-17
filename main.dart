@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swifty_companion/search.dart';
+import 'package:swifty_companion/searchResult.dart';
 import 'package:swifty_companion/splash.dart';
 
 void main() {
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Search(),
+      debugShowCheckedModeBanner: false,
+      home: Splash(),
     );
   }
 }

@@ -19,7 +19,7 @@ class _SearchState extends State<Search> {
         ),
       ),
       child: Scaffold(
-        backgroundColor: Colors.white.withOpacity(0.89),
+        backgroundColor: Colors.black.withOpacity(0.65),
         body: Center(
           // alignment: Alignment.center,
           child: SearchInput(),
