@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swifty_companion/profile.dart';
 import 'package:swifty_companion/search.dart';
 import 'package:swifty_companion/searchResult.dart';
 import 'package:swifty_companion/splash.dart';

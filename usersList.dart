@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swifty_companion/profile.dart';
 
 class UsersList extends StatefulWidget {
   const UsersList({Key? key}) : super(key: key);
@@ -24,7 +25,13 @@ class _UsersListState extends State<UsersList> {
                 child: InkWell(
                     focusColor: Colors.transparent,
                     splashColor: Color(0xff09D178),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => Profile()),
+                        (Route<dynamic> route) => false,
+                      );
+                    },
                     child: Container(
                       width: 40,
                       height: 40,

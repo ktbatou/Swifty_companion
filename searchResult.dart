@@ -46,7 +46,7 @@ class _SearchResultState extends State<SearchResult> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // height: contextheight * 0.1,
-              Text("Search result",
+              const Text("Search result",
                   style: TextStyle(fontSize: 24, color: Colors.white)),
               UsersList(),
               SizedBox(
