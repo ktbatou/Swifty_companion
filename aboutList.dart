@@ -37,7 +37,7 @@ class _AboutListState extends State<AboutList> {
                       child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            "${objs[index].key} :  ${objs[1].value}",
+                            "${objs[index].key} :  ${objs[index].value}",
                             style: TextStyle(color: Colors.white, fontSize: 12),
                           )),
                     )

@@ -29,7 +29,7 @@ List<AboutObjs> aboutObj() {
           color: Colors.white,
         ),
         key: "Phone",
-        value: "+2125479413"),
+        value: "+21254794143"),
     AboutObjs(
         icon: const Icon(
           Icons.account_balance_wallet,
@@ -46,7 +46,7 @@ List<AboutObjs> aboutObj() {
         value: "tbatoukaoutar@gmail.com"),
     AboutObjs(
         icon: const Icon(
-          Icons.equalizer,
+          Icons.check,
           color: Colors.white,
         ),
         key: "Points",

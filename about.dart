@@ -24,6 +24,10 @@ class _AboutState extends State<About> {
               width: 50,
               height: 50,
               decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/me.jpeg'),
+                  fit: BoxFit.fitWidth,
+                ),
                 borderRadius: BorderRadius.all(Radius.circular(50)),
                 color: Colors.grey,
               ),
