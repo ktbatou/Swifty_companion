@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:swifty_companion/Oauth2.dart';
+
 import 'package:swifty_companion/search.dart';
 
 class Splash extends StatefulWidget {
@@ -51,11 +53,14 @@ class _SplashState extends State<Splash> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.pushAndRemoveUntil(
+                      createClient()
+                          .then((value) => print("=====>${value.credentials}"));
+
+                      /*  Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => Search()),
                         (Route<dynamic> route) => false,
-                      );
+                      );*/
                     },
                     child: const Text(
                       "Sign In",
