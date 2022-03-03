@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:swifty_companion/Oauth2.dart';
+import 'package:swifty_companion/authCodeProvider.dart';
 
 import 'package:swifty_companion/search.dart';
 
@@ -52,9 +54,13 @@ class _SplashState extends State<Splash> {
                         fontSize: 16,
                       ),
                     ),
-                    onPressed: () {
-                      createClient()
-                          .then((value) => print("=====>${value.credentials}"));
+                    onPressed: () async {
+                      createClient(context);
+                      //.then((value) => print(
+                      //  "=====> credentials :${value.credentials.toJson()}"));
+
+                      // print(Provider.of<AuthCode>(context, listen: false)
+                      //     .getData);
 
                       /*  Navigator.pushAndRemoveUntil(
                         context,
