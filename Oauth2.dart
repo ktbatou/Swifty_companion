@@ -18,21 +18,29 @@ final redirectUrl = Uri.parse('swifty.companion://callback');
 
 final credentialsFile = File('~/.myapp/credentials.json');
 
-Future<void> createClient(BuildContext context) async {
+Future<dynamic> createClient(BuildContext context) async {
   var grant = oauth2.AuthorizationCodeGrant(
       identifier, authorizationEndpoint, tokenEndpoint,
       secret: secret);
 
-  var authorizationUrl = grant.getAuthorizationUrl(redirectUrl);
+  var authorizationUrl = await grant.getAuthorizationUrl(redirectUrl);
 
-  redirect(authorizationUrl);
+  await redirect(authorizationUrl);
   Provider.of<AuthCode>(context, listen: false)
       .listener(redirectUrl, grant)
-      .onData((data) {
+      .onData((data) async {
     Future<oauth2.Client> test =
         grant.handleAuthorizationResponse(data.queryParameters);
-    test.then((value) => print(value.credentials.toJson()));
+    print(
+        "=====================================================================================");
+    await test.then((value) {
+      print(value.credentials.toJson());
+      Provider.of<AuthCode>(context, listen: false).setData(value.credentials);
+    });
   });
+  Future.delayed(const Duration(seconds: 5), () {});
+  //var test1 = await Provider.of<AuthCode>(context, listen: false).getData;
+  return Provider.of<AuthCode>(context, listen: false).getData;
 }
 
 Future<void> redirect(Uri url) async {

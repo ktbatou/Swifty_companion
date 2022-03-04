@@ -7,20 +7,27 @@ import 'package:provider/provider.dart';
 import 'package:uni_links/uni_links.dart';
 
 class AuthCode extends ChangeNotifier {
-  var _sub;
+  var credentials;
 
   get getData {
-    print("im in the getter\n");
-    return _sub;
+    if (credentials != null) {
+      print("im in the listener this is credentials $credentials\n");
+      return credentials;
+    }
+    print("im in the getter");
+  }
+
+  setData(var data) async {
+    print("im in the setter \n");
+    credentials = await data;
+
+    notifyListeners();
   }
 
   StreamSubscription listener(Uri url, var grant) {
     print("im in the listener \n");
     return uriLinkStream.listen(
-      (uri) {
-        _sub = grant.handleAuthorizationResponse(uri!.queryParameters);
-        print("this is code inside =====> $_sub");
-      },
+      (uri) {},
     );
   }
 }
