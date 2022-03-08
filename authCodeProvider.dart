@@ -1,9 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:oauth2/oauth2.dart' as oauth2;
-import 'package:oauth2/oauth2.dart';
-import 'package:provider/provider.dart';
 import 'package:uni_links/uni_links.dart';
 
 class AuthCode extends ChangeNotifier {
@@ -17,34 +14,11 @@ class AuthCode extends ChangeNotifier {
     print("im in the getter");
   }
 
-  setData(var data) async {
-    print("im in the setter \n");
-    credentials = await data;
+  setData(var data) {
+    print("im in the setter and this is data : $data\n");
+    credentials = data;
     notifyListeners();
   }
-
-// function getData() {
-//   new Promise((resolve, reject) => {
-//     listener((data) => {
-//       resolve(data);
-//     })
-//   });
-// }
-
-// getData().then(print);
-
-//   Future listener(Uri url, var grant, var context) async {
-//     return new Future(() {});
-//     // late var _uri;
-//     // StreamSubscription _sub;
-//     // _sub = uriLinkStream.listen(
-//     //   (uri) async {
-
-//     //   },
-//     // );
-//     // print("outside listener");
-//   }
-// }
 
   Future listener(Uri url) {
     final completer = Completer();
