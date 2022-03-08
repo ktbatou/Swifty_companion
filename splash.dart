@@ -54,8 +54,10 @@ class _SplashState extends State<Splash> {
                         fontSize: 16,
                       ),
                     ),
-                    onPressed: () {
-                      createClient(context).then((value) => print(value));
+                    onPressed: () async {
+                      await createClient(context); //print(
+                      //     Provider.of<AuthCode>(context, listen: false)
+                      //         .getData));
 
                       //.then((value) => print(
                       //  "=====> credentials :${value.credentials.toJson()}"));

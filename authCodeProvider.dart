@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:uni_links/uni_links.dart';
 
 class AuthCode extends ChangeNotifier {
-  var credentials;
+  dynamic credentials;
 
   get getData {
     if (credentials != null) {
@@ -20,14 +20,40 @@ class AuthCode extends ChangeNotifier {
   setData(var data) async {
     print("im in the setter \n");
     credentials = await data;
-
     notifyListeners();
   }
 
-  StreamSubscription listener(Uri url, var grant) {
-    print("im in the listener \n");
-    return uriLinkStream.listen(
-      (uri) {},
-    );
+// function getData() {
+//   new Promise((resolve, reject) => {
+//     listener((data) => {
+//       resolve(data);
+//     })
+//   });
+// }
+
+// getData().then(print);
+
+//   Future listener(Uri url, var grant, var context) async {
+//     return new Future(() {});
+//     // late var _uri;
+//     // StreamSubscription _sub;
+//     // _sub = uriLinkStream.listen(
+//     //   (uri) async {
+
+//     //   },
+//     // );
+//     // print("outside listener");
+//   }
+// }
+
+  Future listener(Uri url) {
+    final completer = Completer();
+
+    Future(() => uriLinkStream.listen((event) {
+          print("im in inside listener");
+          completer.complete(event);
+        }));
+
+    return completer.future;
   }
 }
