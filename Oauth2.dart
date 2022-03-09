@@ -33,12 +33,14 @@ Future<dynamic> createClient(BuildContext context) async {
     await grant
         .handleAuthorizationResponse(value.queryParameters)
         .then((value) {
+      value.get(Uri.parse("https://api.intra.42.fr/v2/users/ktbatou"));
       print(value.credentials.toJson());
-      Provider.of<AuthCode>(context, listen: false).setData(value.credentials);
+      Provider.of<AuthCode>(context, listen: false)
+          .setToken(value.credentials.accessToken);
     });
   });
 
-  return Provider.of<AuthCode>(context, listen: false).getData;
+  return Provider.of<AuthCode>(context, listen: false).getToken;
 }
 
 Future<void> redirect(Uri url) async {

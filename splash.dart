@@ -4,6 +4,7 @@ import 'package:swifty_companion/Oauth2.dart';
 import 'package:swifty_companion/authCodeProvider.dart';
 
 import 'package:swifty_companion/search.dart';
+import 'package:swifty_companion/searchInput.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -55,22 +56,16 @@ class _SplashState extends State<Splash> {
                       ),
                     ),
                     onPressed: () async {
-                      await createClient(context).then(
-                          (value) => print("the return is $value")); //print(
-                      //     Provider.of<AuthCode>(context, listen: false)
-                      //         .getData));
-
-                      //.then((value) => print(
-                      //  "=====> credentials :${value.credentials.toJson()}"));
-
-                      // print(Provider.of<AuthCode>(context, listen: false)
-                      //     .getData);
-
-                      /*  Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => Search()),
-                        (Route<dynamic> route) => false,
-                      );*/
+                      await createClient(context).then((value) {
+                        if (value != Null) {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Search()),
+                            (Route<dynamic> route) => false,
+                          );
+                        }
+                      });
                     },
                     child: const Text(
                       "Sign In",

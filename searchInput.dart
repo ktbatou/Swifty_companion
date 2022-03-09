@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swifty_companion/httpRequest.dart';
 import 'package:swifty_companion/searchResult.dart';
 import 'package:swifty_companion/splash.dart';
 
@@ -76,7 +77,8 @@ class _SearchInputState extends State<SearchInput> {
                       fontSize: 18,
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
+                    await httpRequest(context, login.text);
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => SearchResult()),
