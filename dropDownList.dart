@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:dropdown_button2/custom_dropdown_button2.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -48,7 +47,7 @@ class _CursusListState extends State<CursusList> {
           ),
           color: Colors.grey.shade600),
       hint: Container(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: const Text(
             "Cursus",
             style: TextStyle(color: Colors.black, fontSize: 12),
@@ -57,10 +56,10 @@ class _CursusListState extends State<CursusList> {
           .map((item) => DropdownMenuItem<String>(
                 value: item,
                 child: Container(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       item,
-                      style: TextStyle(color: Colors.black, fontSize: 12),
+                      style: const TextStyle(color: Colors.black, fontSize: 12),
                     )),
               ))
           .toList(),

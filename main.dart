@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:swifty_companion/CursusProvider.dart';
 import 'package:swifty_companion/authCodeProvider.dart';
 import 'package:swifty_companion/profile.dart';
+import 'package:swifty_companion/projects.dart';
+import 'package:swifty_companion/projectsProvider.dart';
 import 'package:swifty_companion/search.dart';
 import 'package:swifty_companion/searchResult.dart';
 import 'package:swifty_companion/splash.dart';
@@ -12,7 +14,8 @@ void main() async {
   await dotenv.load(fileName: ".env");
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => AuthCode()),
-    ChangeNotifierProvider(create: (context) => CursusProvider())
+    ChangeNotifierProvider(create: (context) => CursusProvider()),
+    ChangeNotifierProvider(create: (context) => ProjectsProvider())
   ], child: const MyApp()));
 }
 

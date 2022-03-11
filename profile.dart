@@ -91,13 +91,13 @@ class _ProfileState extends State<Profile> {
                         Row(
                           children: [
                             Container(
-                                margin: EdgeInsets.only(left: 20),
+                                margin: const EdgeInsets.only(left: 20),
                                 width: 50,
                                 height: 50,
                                 child: ImageGetter(img: img)),
                             Container(
                               // width: 100,
-                              padding: EdgeInsets.only(left: 20),
+                              padding: const EdgeInsets.only(left: 20),
                               child: Align(
                                   alignment: Alignment.center,
                                   child: Text(

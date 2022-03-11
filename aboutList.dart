@@ -17,7 +17,7 @@ class _AboutListState extends State<AboutList> {
 
     return Container(
         height: contextheight * 0.5,
-        padding: EdgeInsets.only(left: 30, top: 10),
+        padding: const EdgeInsets.only(left: 30, top: 10),
         child: ListView.separated(
             itemBuilder: (BuildContext context, int index) {
               return Container(
@@ -30,8 +30,11 @@ class _AboutListState extends State<AboutList> {
                       child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            "${objs[index].key} :  ${objs[index].value}",
-                            style: TextStyle(color: Colors.white, fontSize: 12),
+                            objs[index].value != "null"
+                                ? "${objs[index].key} :  ${objs[index].value}"
+                                : "${objs[index].key} :       -",
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 12),
                           )),
                     )
                   ],
