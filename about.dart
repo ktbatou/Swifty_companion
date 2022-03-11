@@ -9,55 +9,6 @@ class About extends StatefulWidget {
 class _AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: EdgeInsets.only(left: 20),
-              width: 50,
-              height: 50,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/me.jpeg'),
-                  fit: BoxFit.fitWidth,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(50)),
-                color: Colors.grey,
-              ),
-            ),
-            Container(
-              // width: 100,
-              padding: EdgeInsets.only(left: 20),
-              child: const Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "kaoutar tbatou",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  )),
-            ),
-          ],
-        ),
-        const Divider(
-          thickness: 0.5,
-          //  indent: 20,
-          //endIndent: 20,
-          color: Color(0xff09D178),
-        ),
-        AboutList()
-        /*Container(
-            margin: const EdgeInsets.only(left: 20),
-            child: const Text(
-              "available",
-              style: TextStyle(color: Colors.white),
-            )),*/
-      ],
-    ));
+    return const AboutList();
   }
 }

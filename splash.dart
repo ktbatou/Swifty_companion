@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swifty_companion/Oauth2.dart';
+import 'package:swifty_companion/SignInBuilder.dart';
 import 'package:swifty_companion/authCodeProvider.dart';
 
 import 'package:swifty_companion/search.dart';
@@ -56,6 +57,7 @@ class _SplashState extends State<Splash> {
                       ),
                     ),
                     onPressed: () async {
+                      //  SignInBuilder();
                       await createClient(context).then((value) {
                         if (value != Null) {
                           Navigator.pushAndRemoveUntil(

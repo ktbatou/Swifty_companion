@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:swifty_companion/authCodeProvider.dart';
 import 'package:swifty_companion/httpRequest.dart';
 import 'package:swifty_companion/searchResult.dart';
 import 'package:swifty_companion/splash.dart';
@@ -49,7 +51,11 @@ class _SearchInputState extends State<SearchInput> {
                 labelText: 'Login',
                 labelStyle: TextStyle(color: Colors.white),
               ),
-              validator: (String? value) {},
+              validator: (String? value) {
+                if (value!.isEmpty) {
+                  return 'Please enter some text';
+                }
+              },
             ),
           ),
           Container(
@@ -78,12 +84,28 @@ class _SearchInputState extends State<SearchInput> {
                     ),
                   ),
                   onPressed: () async {
-                    await httpRequest(context, login.text);
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => SearchResult()),
-                      (Route<dynamic> route) => false,
-                    );
+                    //TODO: handle errors msgs
+                    if (_formKey.currentState!.validate()) {
+                      await httpRequest(context, login.text).then((value) {
+                        value = Provider.of<AuthCode>(context, listen: false)
+                            .getData;
+                        if (value.statusCode == 200) {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SearchResult()),
+                            (Route<dynamic> route) => false,
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              backgroundColor: Colors.red,
+                              content: value.statusCode == 404
+                                  ? const Text("User is not found")
+                                  : const Text(
+                                      "We have a problem with our server. Please try again later.")));
+                        }
+                      });
+                    }
                   },
                   child: const Text(
                     "search",

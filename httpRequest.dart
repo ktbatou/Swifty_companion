@@ -12,9 +12,8 @@ Future httpRequest(var context, var user) async {
     'Accept': 'application/json',
     'Authorization': 'Bearer $token',
   }).then((value) {
-    if (value.statusCode == 200) {
-      print(json.decode(value.body)["usual_full_name"]);
-      Provider.of<AuthCode>(context, listen: false).setData(value);
-    }
+    print(value.statusCode);
+    Provider.of<AuthCode>(context, listen: false).setData(value);
   });
+  return 1;
 }

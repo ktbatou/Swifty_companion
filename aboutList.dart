@@ -13,7 +13,8 @@ class _AboutListState extends State<AboutList> {
   Widget build(BuildContext context) {
     double contextWidth = MediaQuery.of(context).size.width;
     double contextheight = MediaQuery.of(context).size.height;
-    List<AboutObjs> objs = aboutObj();
+    List<AboutObjs> objs = aboutObj(context);
+
     return Container(
         height: contextheight * 0.5,
         padding: EdgeInsets.only(left: 30, top: 10),
@@ -23,14 +24,6 @@ class _AboutListState extends State<AboutList> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    /* Container(
-                      width: 40,
-                      height: 40,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                        color: Colors.grey,
-                      ),
-                    ),*/
                     objs[index].icon,
                     Container(
                       padding: EdgeInsets.only(left: 25),

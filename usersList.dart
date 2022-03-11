@@ -1,10 +1,13 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
+import 'package:swifty_companion/ImageFutureBuilder.dart';
 import 'package:swifty_companion/authCodeProvider.dart';
 import 'package:swifty_companion/profile.dart';
+import 'package:http/http.dart' as http;
 
 class UsersList extends StatefulWidget {
   const UsersList({Key? key}) : super(key: key);
@@ -22,6 +25,7 @@ class _UsersListState extends State<UsersList> {
     final res = Provider.of<AuthCode>(context, listen: false).getData;
     var user = json.decode(res.body);
     var img = user["image_url"];
+
     return Container(
       //  width: contextWidth * 0.8,
       height: contextheight * 0.7,
@@ -49,32 +53,7 @@ class _UsersListState extends State<UsersList> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          CachedNetworkImage(
-                            imageUrl: img,
-                            placeholder: (context, url) =>
-                                CircularProgressIndicator(),
-                            errorWidget: (context, url, error) {
-                              print("this is an error ========= $error");
-                              return const Image(
-                                  image: NetworkImage(
-                                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW984UjnFiyu90Wdrtebh_QaUVShVaqjiT7Qs1t3r8nXBZgQE6UstBuAon5J-ZAWFRuns&usqp=CAU"));
-                            },
-                            imageBuilder: (context, imageProvider) => Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(50)),
-                                color: Colors.grey,
-                                image:
-                                    //chack image with a func that return either true of false
-                                    //show img or a user png
-                                    DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.fitHeight),
-                              ),
-                            ),
-                          ),
+                          ImageGetter(img: img),
                           Container(
                             padding: EdgeInsets.only(left: 25),
                             child: Align(
