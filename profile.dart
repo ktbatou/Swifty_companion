@@ -117,15 +117,13 @@ class _ProfileState extends State<Profile> {
                       //endIndent: 20,
                       color: Color(0xff09D178),
                     ),
-                    flagUserCursus
-                        ? Expanded(
-                            child: TabBarView(children: [
-                              About(),
-                              Projects(),
-                              About(),
-                            ]),
-                          )
-                        : Container(),
+                    Expanded(
+                      child: TabBarView(children: [
+                        About(),
+                        flagUserCursus ? Projects() : Container(),
+                        About(),
+                      ]),
+                    ),
                   ],
                 ))));
   }

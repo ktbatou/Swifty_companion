@@ -14,7 +14,7 @@ class AboutObjs {
 
 List<AboutObjs> aboutObj(var context) {
   final res = Provider.of<AuthCode>(context, listen: false).getData;
-
+  var value = Provider.of<CursusProvider>(context).getCursus;
   var user = json.decode(res.body);
   //print(user["cursus_users"][2]["user"]["level"]);
   List<AboutObjs> objs = [
@@ -24,66 +24,51 @@ List<AboutObjs> aboutObj(var context) {
           color: Colors.white,
         ),
         key: "Available",
-        value: user["cursus_users"]
-                    [Provider.of<CursusProvider>(context).getCursus]["user"]
-                ["location"]
-            .toString()),
+        value: user["location"].toString()),
     AboutObjs(
         icon: const Icon(
           Icons.equalizer,
           color: Colors.white,
         ),
         key: "Level",
-        value: user["cursus_users"]
-                [Provider.of<CursusProvider>(context).getCursus]["level"]
-            .toString()),
+        value: user["cursus_users"].length == 0
+            ? "-"
+            : user["cursus_users"][value]["level"].toString()),
     AboutObjs(
         icon: const Icon(
           Icons.phone,
           color: Colors.white,
         ),
         key: "Phone",
-        value: user["cursus_users"]
-                    [Provider.of<CursusProvider>(context).getCursus]["user"]
-                ["phone"]
-            .toString()),
+        value: user["phone"].toString()),
     AboutObjs(
         icon: const Icon(
           Icons.account_balance_wallet,
           color: Colors.white,
         ),
         key: "Wallet",
-        value: user["cursus_users"]
-                    [Provider.of<CursusProvider>(context).getCursus]["user"]
-                ["wallet"]
-            .toString()),
+        value: user["wallet"].toString()),
     AboutObjs(
         icon: const Icon(
           Icons.email,
           color: Colors.white,
         ),
         key: "Email",
-        value: user["cursus_users"]
-                    [Provider.of<CursusProvider>(context).getCursus]["user"]
-                ["email"]
-            .toString()),
+        value: user["email"].toString()),
     AboutObjs(
         icon: const Icon(
           Icons.check,
           color: Colors.white,
         ),
         key: "Points",
-        value: user["cursus_users"]
-                    [Provider.of<CursusProvider>(context).getCursus]["user"]
-                ["correction_point"]
-            .toString()),
+        value: user["correction_point"].toString()),
     AboutObjs(
         icon: const Icon(
           Icons.location_on,
           color: Colors.white,
         ),
         key: "Location",
-        value: "Morocco, Khouribga")
+        value: "${user["campus"][0]["city"]},  ${user["campus"][0]["country"]}")
   ];
   return objs;
 }

@@ -4,10 +4,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
+import 'package:swifty_companion/CursusProvider.dart';
 import 'package:swifty_companion/ImageFutureBuilder.dart';
 import 'package:swifty_companion/authCodeProvider.dart';
 import 'package:swifty_companion/profile.dart';
 import 'package:http/http.dart' as http;
+import 'package:swifty_companion/projectSetter.dart';
 
 class UsersList extends StatefulWidget {
   const UsersList({Key? key}) : super(key: key);
@@ -39,6 +41,12 @@ class _UsersListState extends State<UsersList> {
                     focusColor: Colors.transparent,
                     splashColor: Color(0xff09D178),
                     onTap: () {
+                      if (user["cursus_users"].length > 0) {
+                        int id = user["cursus_users"][0]["cursus"]["id"];
+                        Provider.of<CursusProvider>(context, listen: false)
+                            .setCursusId(id);
+                        projectsList(context, id);
+                      }
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => Profile()),

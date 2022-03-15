@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swifty_companion/CursusProvider.dart';
 import 'package:swifty_companion/authCodeProvider.dart';
+import 'package:swifty_companion/projectSetter.dart';
 
 class CursusList extends StatefulWidget {
   const CursusList({Key? key}) : super(key: key);
@@ -24,6 +25,7 @@ class _CursusListState extends State<CursusList> {
       items.add(user["cursus_users"][i]["cursus"]["name"]);
       i++;
     }
+    if (user["cursus_users"].length == 0) items.add("Cursus");
     return items;
   }
 
@@ -48,8 +50,8 @@ class _CursusListState extends State<CursusList> {
           color: Colors.grey.shade600),
       hint: Container(
           padding: const EdgeInsets.only(left: 10),
-          child: const Text(
-            "Cursus",
+          child: Text(
+            items[0],
             style: TextStyle(color: Colors.black, fontSize: 12),
           )),
       items: items
@@ -70,7 +72,7 @@ class _CursusListState extends State<CursusList> {
           int id = user["cursus_users"][a]["cursus"]["id"];
           Provider.of<CursusProvider>(context, listen: false).setCursus(a);
           Provider.of<CursusProvider>(context, listen: false).setCursusId(id);
-
+          projectsList(context, id);
           print(value);
           selectedValue = value.toString();
         });
