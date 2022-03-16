@@ -9,6 +9,7 @@ import 'package:swifty_companion/dropDownList.dart';
 import 'package:swifty_companion/projects.dart';
 import 'package:swifty_companion/search.dart';
 import 'package:swifty_companion/searchResult.dart';
+import 'package:swifty_companion/skills.dart';
 import 'package:swifty_companion/splash.dart';
 
 class Profile extends StatefulWidget {
@@ -121,7 +122,7 @@ class _ProfileState extends State<Profile> {
                       child: TabBarView(children: [
                         About(),
                         flagUserCursus ? Projects() : Container(),
-                        About(),
+                        flagUserCursus ? Skills() : Container(),
                       ]),
                     ),
                   ],
