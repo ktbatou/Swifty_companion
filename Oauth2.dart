@@ -19,11 +19,10 @@ final redirectUrl = Uri.parse('swifty.companion://callback');
 final credentialsFile = File('~/.myapp/credentials.json');
 
 Future<dynamic> createClient(BuildContext context) async {
-  print("click");
   var grant = oauth2.AuthorizationCodeGrant(
       identifier, authorizationEndpoint, tokenEndpoint,
       secret: secret);
-
+  print("===================> this is grant $grant");
   var authorizationUrl = grant.getAuthorizationUrl(redirectUrl);
 
   await redirect(authorizationUrl);
@@ -33,8 +32,6 @@ Future<dynamic> createClient(BuildContext context) async {
     await grant
         .handleAuthorizationResponse(value.queryParameters)
         .then((value) {
-      value.get(Uri.parse("https://api.intra.42.fr/v2/users/ktbatou"));
-      print(value.credentials.toJson());
       Provider.of<AuthCode>(context, listen: false)
           .setToken(value.credentials.accessToken);
     });

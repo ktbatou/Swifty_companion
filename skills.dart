@@ -20,45 +20,55 @@ class _SkillsState extends State<Skills> {
     final res = Provider.of<AuthCode>(context, listen: false).getData;
     var value = Provider.of<CursusProvider>(context).getCursus;
     var user = json.decode(res.body);
-    return Container(
-      padding: const EdgeInsets.only(left: 30, top: 10, right: 30),
-      child: ListView.separated(
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(
-            height: 20,
-          );
-        },
-        itemCount: user["cursus_users"][value]["skills"].length,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: contextWidth * 0.4,
-                  child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        user["cursus_users"][value]["skills"][index]["name"],
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 12),
-                      )),
-                ),
-                Container(
-                  child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        user["cursus_users"][value]["skills"][index]["level"]
-                            .toString(),
-                        style:
-                            const TextStyle(color: Colors.green, fontSize: 12),
-                      )),
-                ),
-              ],
+    return user["cursus_users"][value]["skills"].length == 0
+        ? const Center(
+            child: Text(
+            "User has no skills",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ))
+        : Container(
+            padding: const EdgeInsets.only(left: 30, top: 10, right: 30),
+            child: ListView.separated(
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(
+                  height: 20,
+                );
+              },
+              itemCount: user["cursus_users"][value]["skills"].length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: contextWidth * 0.4,
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              user["cursus_users"][value]["skills"][index]
+                                  ["name"],
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 12),
+                            )),
+                      ),
+                      Container(
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              user["cursus_users"][value]["skills"][index]
+                                          ["level"]
+                                      .toString() +
+                                  "%",
+                              //toFloat(3)  <<< dart
+                              style: const TextStyle(
+                                  color: Colors.green, fontSize: 12),
+                            )),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
           );
-        },
-      ),
-    );
   }
 }

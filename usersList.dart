@@ -19,6 +19,7 @@ class UsersList extends StatefulWidget {
 }
 
 class _UsersListState extends State<UsersList> {
+  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
     double contextWidth = MediaQuery.of(context).size.width;
@@ -45,6 +46,8 @@ class _UsersListState extends State<UsersList> {
                         int id = user["cursus_users"][0]["cursus"]["id"];
                         Provider.of<CursusProvider>(context, listen: false)
                             .setCursusId(id);
+                        Provider.of<CursusProvider>(context, listen: false)
+                            .setCursus(0);
                         projectsList(context, id);
                       }
                       Navigator.pushAndRemoveUntil(

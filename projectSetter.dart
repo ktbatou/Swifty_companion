@@ -25,6 +25,7 @@ projectsList(var context, var id) {
                   {
                     pjctList[project_id] = {
                       "parent": {
+                        "clicked": false,
                         "name": "",
                         "id": "",
                         "final_mark": "",

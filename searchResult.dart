@@ -49,9 +49,6 @@ class _SearchResultState extends State<SearchResult> {
               const Text("Search result",
                   style: TextStyle(fontSize: 24, color: Colors.white)),
               UsersList(),
-              SizedBox(
-                height: contextheight * 0.05,
-              )
             ],
           ),
         ),

@@ -121,8 +121,22 @@ class _ProfileState extends State<Profile> {
                     Expanded(
                       child: TabBarView(children: [
                         About(),
-                        flagUserCursus ? Projects() : Container(),
-                        flagUserCursus ? Skills() : Container(),
+                        flagUserCursus
+                            ? Projects()
+                            : const Center(
+                                child: Text(
+                                "User has no Projects",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              )),
+                        flagUserCursus
+                            ? Skills()
+                            : const Center(
+                                child: Text(
+                                "User has no skills",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              )),
                       ]),
                     ),
                   ],

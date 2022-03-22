@@ -15,6 +15,7 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
     double contextWidth = MediaQuery.of(context).size.width;
@@ -56,19 +57,24 @@ class _SplashState extends State<Splash> {
                         fontSize: 16,
                       ),
                     ),
-                    onPressed: () async {
-                      //  SignInBuilder();
-                      await createClient(context).then((value) {
-                        if (value != Null) {
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Search()),
-                            (Route<dynamic> route) => false,
-                          );
-                        }
-                      });
-                    },
+                    onPressed: isPressed == false
+                        ? () async {
+                            setState(() {
+                              isPressed = true;
+                            });
+                            //  SignInBuilder();
+                            await createClient(context).then((value) {
+                              if (value != Null) {
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Search()),
+                                  (Route<dynamic> route) => false,
+                                );
+                              }
+                            });
+                          }
+                        : null,
                     child: const Text(
                       "Sign In",
                     ),

@@ -13,6 +13,7 @@ class SearchInput extends StatefulWidget {
 }
 
 class _SearchInputState extends State<SearchInput> {
+  bool isPressed = false;
   final _formKey = GlobalKey<FormState>();
   TextEditingController login = TextEditingController();
   @override
@@ -30,7 +31,7 @@ class _SearchInputState extends State<SearchInput> {
             width: contextWidth * 0.75,
             child: TextFormField(
               controller: login,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
@@ -59,7 +60,7 @@ class _SearchInputState extends State<SearchInput> {
             ),
           ),
           Container(
-              //   margin: EdgeInsets.only(bottom: contextheight * 0.15),
+              //margin: EdgeInsets.only(bottom: contextheight * 0.15),
               width: contextWidth > contextHeight
                   ? contextWidth * 0.35
                   : contextWidth * 0.55,
@@ -84,7 +85,6 @@ class _SearchInputState extends State<SearchInput> {
                     ),
                   ),
                   onPressed: () async {
-                    //TODO: handle errors msgs
                     if (_formKey.currentState!.validate()) {
                       await httpRequest(context, login.text).then((value) {
                         value = Provider.of<AuthCode>(context, listen: false)
