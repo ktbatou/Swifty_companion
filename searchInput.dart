@@ -13,7 +13,7 @@ class SearchInput extends StatefulWidget {
 }
 
 class _SearchInputState extends State<SearchInput> {
-  bool isPressed = false;
+  bool disabledBtn = true;
   final _formKey = GlobalKey<FormState>();
   TextEditingController login = TextEditingController();
   @override
@@ -30,6 +30,20 @@ class _SearchInputState extends State<SearchInput> {
             padding: EdgeInsets.only(bottom: contextHeight * 0.05),
             width: contextWidth * 0.75,
             child: TextFormField(
+              onChanged: (val) => {
+                if (val.isEmpty)
+                  {
+                    setState(() {
+                      disabledBtn = true;
+                    })
+                  }
+                else
+                  {
+                    setState(() {
+                      disabledBtn = false;
+                    })
+                  }
+              },
               controller: login,
               style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
@@ -84,29 +98,40 @@ class _SearchInputState extends State<SearchInput> {
                       fontSize: 18,
                     ),
                   ),
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      await httpRequest(context, login.text).then((value) {
-                        value = Provider.of<AuthCode>(context, listen: false)
-                            .getData;
-                        if (value.statusCode == 200) {
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SearchResult()),
-                            (Route<dynamic> route) => false,
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              backgroundColor: Colors.red,
-                              content: value.statusCode == 404
-                                  ? const Text("User is not found")
-                                  : const Text(
-                                      "We have a problem with our server. Please try again later.")));
-                        }
-                      });
-                    }
-                  },
+                  onPressed: disabledBtn == true
+                      ? null
+                      : () async {
+                          if (_formKey.currentState!.validate()) {
+                            await httpRequest(context, login.text)
+                                .then((value) {
+                              value =
+                                  Provider.of<AuthCode>(context, listen: false)
+                                      .getData;
+                              if (value.statusCode == 200) {
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SearchResult()),
+                                  (Route<dynamic> route) => false,
+                                );
+                                setState(() {
+                                  disabledBtn = false;
+                                });
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    backgroundColor: Colors.red,
+                                    content: value.statusCode == 404
+                                        ? const Text("User is not found")
+                                        : const Text(
+                                            "We have a problem with our server. Please try again later.")));
+                                login.clear();
+                                setState(() {
+                                  disabledBtn = true;
+                                });
+                              }
+                            });
+                          }
+                        },
                   child: const Text(
                     "search",
                   ),

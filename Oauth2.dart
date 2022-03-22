@@ -22,7 +22,6 @@ Future<dynamic> createClient(BuildContext context) async {
   var grant = oauth2.AuthorizationCodeGrant(
       identifier, authorizationEndpoint, tokenEndpoint,
       secret: secret);
-  print("===================> this is grant $grant");
   var authorizationUrl = grant.getAuthorizationUrl(redirectUrl);
 
   await redirect(authorizationUrl);

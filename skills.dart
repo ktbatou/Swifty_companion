@@ -57,7 +57,7 @@ class _SkillsState extends State<Skills> {
                             child: Text(
                               user["cursus_users"][value]["skills"][index]
                                           ["level"]
-                                      .toString() +
+                                      .toStringAsFixed(2) +
                                   "%",
                               //toFloat(3)  <<< dart
                               style: const TextStyle(
